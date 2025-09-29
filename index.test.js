@@ -1,4 +1,4 @@
-const fizzBuzzValue = require("./index");
+const { fizzBuzzValue, MAX_NUMBER, MIN_NUMBER } = require("./index");
 
 describe("FizzBuzz", () => {
   describe("when given a regular number", () => {
@@ -25,6 +25,14 @@ describe("FizzBuzz", () => {
     });
   });
 
+  describe("when given a multiple of 7", () => {
+    test("should return 'Pop'", () => {
+      expect(fizzBuzzValue(7)).toBe("Pop");
+      expect(fizzBuzzValue(14)).toBe("Pop");
+      expect(fizzBuzzValue(28)).toBe("Pop");
+    });
+  });
+
   describe("when given a multiple of 3 and 5", () => {
     test("should return 'FizzBuzz'", () => {
       expect(fizzBuzzValue(15)).toBe("FizzBuzz");
@@ -33,15 +41,38 @@ describe("FizzBuzz", () => {
     });
   });
 
+  describe("when given a multiple of 3 and 7", () => {
+    test("should return 'FizzPop'", () => {
+      expect(fizzBuzzValue(21)).toBe("FizzPop");
+      expect(fizzBuzzValue(42)).toBe("FizzPop");
+      expect(fizzBuzzValue(63)).toBe("FizzPop");
+    });
+  });
+
+  describe("when given a multiple of 5 and 7", () => {
+    test("should return 'BuzzPop'", () => {
+      expect(fizzBuzzValue(35)).toBe("BuzzPop");
+      expect(fizzBuzzValue(70)).toBe("BuzzPop");
+    });
+  });
+
+  describe("when given a multiple of 3, 5 and 7", () => {
+    test("should return 'FizzBuzzPop'", () => {
+      expect(fizzBuzzValue(MAX_NUMBER)).toBe("FizzBuzzPop");
+    });
+  });
+
   describe("when given invalid input", () => {
     test("should throw error for numbers below 1", () => {
-      expect(() => fizzBuzzValue(0)).toThrow("Number out of range");
-      expect(() => fizzBuzzValue(-1)).toThrow("Number out of range");
+      expect(() => fizzBuzzValue(MIN_NUMBER - 1)).toThrow(
+        "Number out of range"
+      );
     });
 
     test("should throw error for numbers above 100", () => {
-      expect(() => fizzBuzzValue(101)).toThrow("Number out of range");
-      expect(() => fizzBuzzValue(150)).toThrow("Number out of range");
+      expect(() => fizzBuzzValue(MAX_NUMBER + 1)).toThrow(
+        "Number out of range"
+      );
     });
   });
 });
